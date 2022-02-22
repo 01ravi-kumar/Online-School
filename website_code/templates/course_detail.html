@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}  Course Details {% endblock title %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-4">
+        <div class="my-3 text-center">
+            <h1>Course Details</h1>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Course Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{cou["course_code"]}}</td>
+                        <td>{{cou["course_name"]}}</td>
+                        <td>{{cou["course_description"]}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-8">
+
+        <div class="my-3 text-center">
+            <h1>Student List</h1>
+        </div>
+        {% if enroll %}
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">Roll Number</th>
+                        <th scope="col">Student First Name</th>
+                        <th scope="col">Student Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ind in range(enroll|length) %}
+                    <tr>
+                        <th scope="row">{{ind+1}}</th>
+                        <td>{{enroll[ind]["roll_number"]}}</td>
+                        <td>{{enroll[ind]["first_name"]}}</td>
+                        <td>{{enroll[ind]["last_name"]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p class="text-center"> No student is enrolled in the {{cou["course_name"]}}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

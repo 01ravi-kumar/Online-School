@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title%} Course {% endblock title %}
+
+{% block content%}
+    <div class="my-5 text-center">
+        <h1>Courses List</h1>
+    </div>
+    <div class="container-fluid">
+        {% if course_list %}
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">Course Code</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Course Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                {% for ind in range( course_list|length ) %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ind+1}}</th>
+                        <td>
+                            <a href="/course/{{course_list[ind]['course_id']}}">
+                                <button type="button" class="btn btn-info">
+                                    {{course_list[ind]["course_code"]}}
+                                </button>
+                            </a>
+                        </td>
+                        <td>{{course_list[ind]["course_name"]}}</td>
+                        <td>{{course_list[ind]["course_description"]}}</td>
+                        <td>
+                        <a href="/course/{{course_list[ind]['course_id']}}/update" type="button">
+                            <button type="button" class="btn btn-success">Update</button>
+                        </a>
+                        <a href="/course/{{course_list[ind]['course_id']}}/delete" type="button">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        {% else %}
+            No course found. Add a course now!
+        {% endif %}
+    </div>
+    <div class="my-5" align="center">
+    <a href="/course/create"  type="button">
+        <button type="button" class="btn btn-primary">Add Course</button>
+    </a>
+    </div>
+
+{% endblock content%}

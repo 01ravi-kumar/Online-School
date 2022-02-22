@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title%} Home {% endblock title %}
+
+{% block content%}
+    <div class="my-5 text-center">
+        <h2>Student Table</h2>
+    </div>
+    <div class="container-fluid">
+        {% if students  %}
+            <table class = "table" >
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">SNo</th>
+                        <th scope="col">Roll Number</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ind in range(students|length) %}
+                    <tr>
+                        <th scope="row">{{ind+1}}</th>
+                        <td>
+                            <a href="/student/{{students[ind]['student_id']}}">
+                                <button type="button" class="btn btn-info">
+                                    {{students[ind]["roll_number"]}}
+                                </button>
+                            </a>
+                        </td>
+
+                        <td>{{students[ind]["first_name"]}}</td>
+                        <td>{{students[ind]["last_name"]}}</td>
+                        <td>
+                        <a href="/student/{{students[ind]['student_id']}}/update" type="button">
+                            <button type="button" class="btn btn-success">Update</button>
+                        </a>
+                        <a href="/student/{{students[ind]['student_id']}}/delete" type="button">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            No Student Found. Add a student now!
+        {% endif %}
+    </div>
+    <div class="my-5" align="center">
+    <a href="/student/create"  type="button">
+        <button type="button" class="btn btn-primary">Add Student</button>
+    </a>
+    </div>
+
+{% endblock content%}

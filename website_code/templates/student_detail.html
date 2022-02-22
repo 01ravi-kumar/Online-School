@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+{% block title %} Student details {% endblock title%}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-4">
+        <div class="my-3">
+            <h1 class="text-center">Student Details</h1>
+        </div>
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Roll Number</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ std["roll_number"] }}</td>
+                        <td>{{ std["first_name"] }}</td>
+                        <td>{{ std["last_name"] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-8">
+
+        <div class="my-3">
+            <h1 class="text-center">Course List</h1>
+        </div>
+        {% if en_list %}
+        <div class="container-fluid">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">S. No.</th>
+                        <th scope="col">Course Code</th>
+                        <th scope="col">Course Name</th>
+                        <th scope="col">Course Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                {% for ind in range(en_list|length) %}
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ ind+1 }}</th>
+                        <td>{{ en_list[ind]["course_code"] }}</td>
+                        <td>{{ en_list[ind]["course_name"] }}</td>
+                        <td>{{ en_list[ind]["course_description"] }}</td>
+                        <td>
+                            <a href="/student/{{std['student_id']}}/withdraw/{{en_list[ind]['course_id']}}">
+                                <button type="button" class="btn btn-danger">
+                                    Withdraw
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p class="text-center">{{ std["first_name"] }} is not enroll in any course</p>
+        {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

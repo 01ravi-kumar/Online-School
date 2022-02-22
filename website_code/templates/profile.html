@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock title %}
+
+{% block content %}
+
+    <div class="content-section my-5">
+        <div class="media">
+            <img class="rounded-circle account-img" src= {{img}}>
+        </div>
+        <div class="media-body">
+          <h2 class="account-heading">{{user.name}}</h2>
+          <p class="text-secondary">Email: {{user.email}}</p>
+          <p class="text-secondary">Designation: {{user.designation}}</p>
+          <p class="text-secondary">Department: {{user.department}}</p>
+        </div>
+
+
+    </div>
+
+
+
+{% endblock content %}
