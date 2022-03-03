@@ -129,7 +129,7 @@ def update_delete_course(c_id,act):
             new_course.course_name=request.form['c_name']
             new_course.course_description=request.form['desc']
             db.session.commit()
-            redirect(url_for("views.courses"))
+            return redirect(url_for("views.courses"))
 
 
 @views.route("/profile")
